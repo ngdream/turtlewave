@@ -12,27 +12,24 @@ def convert(filename:str,outputname:str):
     output="""import turtle
 turtle.speed(0)
 turtle.colormode(255)
+turtle.tracer(0,0)
 turtle.hideturtle()
-turtle.tracer(0.0)
-def drawpixel(x, y, color, pixelsize = 0.1 ):
-    turtle.penup()
-    turtle.setpos(x*pixelsize,y*pixelsize)
+def drawpixel(x, y, color):
+
+    turtle.setpos(x,y)
     turtle.color(color)
-    turtle.pendown()
-    turtle.begin_fill()
-    for i in range(4):
-        turtle.forward(pixelsize)
-        turtle.right(90)
-    turtle.end_fill()
+    turtle.forward(1)
     """
+
+
 
     for i in range(1,width):
         for j in range(1,height):
             if type(pix[i,j])==int:
-                r,g,b=(0,0,0)
+                r,g,b,a=(0,0,0,0)
             else :
                 r,g,b,a=pix[i,j]
-            output+="\ndrawpixel(%d,%d,(%d,%d,%d),%d)"%(i,-j,r,g,b,1)
+            output+="\ndrawpixel(%d,%d,(%d,%d,%d))"%(i,-j,r,g,b)
     output+="\nturtle.update()\nturtle.mainloop()"
 
     f = open(outputname, "w")
